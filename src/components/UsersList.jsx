@@ -1,5 +1,6 @@
 import React from "react";
 import UserCard from "./UserCard";
+import "./styles/UsersList.css";
 
 const UsersList = ({
   users,
@@ -8,7 +9,7 @@ const UsersList = ({
   handleClickShowModal,
 }) => {
   return (
-    <section>
+    <section className="UserList">
       {users.map((user) => (
         <UserCard
           key={user.id}
