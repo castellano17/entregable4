@@ -1,14 +1,25 @@
-import React from 'react'
-import UserCard from './UserCard'
+import React from "react";
+import UserCard from "./UserCard";
 
-const UsersList = ({ users }) => {
-    return (
-        <section>
-            {
-                users.map(user => <UserCard key={user.id} user={user} />)
-            }
-        </section>
-    )
-}
+const UsersList = ({
+  users,
+  deleteUser,
+  setUpdatingUser,
+  handleClickShowModal,
+}) => {
+  return (
+    <section>
+      {users.map((user) => (
+        <UserCard
+          key={user.id}
+          user={user}
+          deleteUser={deleteUser}
+          setUpdatingUser={setUpdatingUser}
+          handleClickShowModal={handleClickShowModal}
+        />
+      ))}
+    </section>
+  );
+};
 
-export default UsersList
+export default UsersList;

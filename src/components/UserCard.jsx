@@ -1,6 +1,15 @@
 import React from "react";
 
-const UserCard = ({ user }) => {
+const UserCard = ({
+  user,
+  deleteUser,
+  setUpdatingUser,
+  handleClickShowModal,
+}) => {
+  const handleClickEdit = () => {
+    setUpdatingUser(user);
+    handleClickShowModal();
+  };
   return (
     <article>
       <h3>
@@ -19,11 +28,11 @@ const UserCard = ({ user }) => {
       </ul>
       <hr />
       <footer>
-        <button>
-          <i class="bx bx-plus"></i>
+        <button onClick={() => deleteUser(user.id)}>
+          <i className="bx bx-trash"></i>
         </button>
-        <i className="bx bx-trash"></i>
-        <button>
+
+        <button onClick={handleClickEdit}>
           <i className="bx bx-pencil"></i>
         </button>
       </footer>
