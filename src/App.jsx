@@ -4,6 +4,7 @@ import "./App.css";
 import ModalForm from "./components/ModalForm";
 import NavBar from "./components/NavBar";
 import UsersList from "./components/UsersList";
+import { Alert, message } from 'antd';
 
 const BASE_URL = "https://users-crud.academlo.tech/";
 
@@ -22,8 +23,12 @@ function App() {
       .then(() => {
         getAllUsers();
         handleClickShowModal();
+        message.success('El usuario ha sido creado con éxito')
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        message.error('Ha ocurrido un error al crear el usuario');
+      })
   };
 
   const getAllUsers = () => {
@@ -36,8 +41,14 @@ function App() {
   const deleteUser = (id) => {
     axios
       .delete(`${BASE_URL}users/${id}/`)
-      .then(() => getAllUsers())
-      .catch((err) => console.log(err));
+      .then(() => {
+        getAllUsers()
+        message.success('El usuario ha sido eliminado con éxito')
+      })
+      .catch((err) => {
+        console.log(err)
+        message.error('Ha ocurrido un error al eliminar el usuario');
+      })
   };
 
   const updateUser = (data, id) => {
@@ -46,8 +57,14 @@ function App() {
       .then(() => {
         getAllUsers();
         handleClickShowModal();
+        message.success('El usuario ha sido editado con éxito')
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        message.error('Ha ocurrido un error al editar el usuario');
+
+
+      })
   };
 
   useEffect(() => {

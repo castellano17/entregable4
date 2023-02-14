@@ -10,6 +10,13 @@
   font-weight: 800;
 }
 
+.UserCard__email span {
+  font-weight: bold;
+}
+.UserCard__birthday span {
+  font-weight: bold;
+}
+
 .UserCard__line {
   margin-bottom: 40px;
 }
