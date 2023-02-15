@@ -57,6 +57,7 @@ function App() {
       .then(() => {
         getAllUsers();
         handleClickShowModal();
+        setUpdatingUser(false)
         message.success('El usuario ha sido editado con éxito')
       })
       .catch((err) => {
