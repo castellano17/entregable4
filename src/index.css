@@ -24,3 +24,7 @@ ul {
   padding: 0;
   overflow-wrap: anywhere;
 }
+
+p {
+  margin: 0;
+}

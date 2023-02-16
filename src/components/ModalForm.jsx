@@ -10,6 +10,8 @@ const defaultValues = {
   birthday: "",
 };
 
+const regexEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
 const ModalForm = ({
   isShowModal,
   handleClickShowModal,
@@ -18,7 +20,7 @@ const ModalForm = ({
   updateUser,
   setUpdatingUser,
 }) => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const submit = (data) => {
     if (updatingUser) {
@@ -53,50 +55,94 @@ const ModalForm = ({
             First Name:
           </label>
           <input
-            className="modalForm__input"
+            className={`modalForm__input ${errors.first_name ? ' input__error' : ''}`}
             type="text"
-            {...register("first_name")}
+            {...register("first_name", {
+              required: 'This is field is requerid', maxLength: {
+                value: 25,
+                message: 'text is too long'
+              }
+            })}
           />
+          {
+            errors.first_name && <p className='modalForm__error' >{errors.first_name.message} </p>
+          }
         </div>
         <div className="modalForm__div">
           <label className="modalForm__label" htmlFor="">
             Last name
           </label>
           <input
-            className="modalForm__input"
+            className={`modalForm__input ${errors.last_name ? ' input__error' : ''}`}
             type="text"
-            {...register("last_name")}
+            {...register("last_name", {
+              required: 'This is field is requerid', maxLength: {
+                value: 25,
+                message: 'text is too long'
+              }
+            })}
           />
+          {
+            errors.last_name && <p className='modalForm__error' >{errors.last_name.message} </p>
+          }
+
         </div>
         <div className="modalForm__div">
           <label className="modalForm__label" htmlFor="">
             Email
           </label>
           <input
-            className="modalForm__input"
+            className={`modalForm__input ${errors.email ? 'input__error ' : ''}`}
             type="email"
-            {...register("email")}
+            {...register("email", {
+              required: 'This is field is requerid',
+              maxLength: {
+                value: 150,
+                message: 'email is too long'
+              },
+              pattern: {
+                value: regexEmail,
+                message: 'Thi is not a valid email'
+              }
+            })}
           />
+          {
+            errors.email && <p className='modalForm__error' >{errors.email.message} </p>
+          }
         </div>
         <div className="modalForm__div">
           <label className="modalForm__label" htmlFor="">
             Password
           </label>
           <input
-            className="modalForm__input"
+            className={`modalForm__input ${errors.password ? 'input__error ' : ''}`}
             type="password"
-            {...register("password")}
+            {...register("password", {
+              required: 'This is field is requerid', maxLength: {
+                value: 128,
+                message: 'Password is too long'
+              }
+            }
+            )}
           />
+          {
+            errors.password && <p className='modalForm__error' >{errors.password.message} </p>
+          }
         </div>
         <div className="modalForm__div">
           <label className="modalForm__label" htmlFor="">
             Birthday
           </label>
           <input
-            className="modalForm__input"
+            className={`modalForm__input ${errors.birthday ? 'input__error ' : ''}`}
             type="date"
-            {...register("birthday")}
-          />{" "}
+            {...register("birthday", {
+              required: 'This is field is requerid',
+            })}
+          />
+          {
+            errors.birthday && <p className='modalForm__error' >{errors.birthday.message} </p>
+          }
         </div>
         <i onClick={handleClickClose} className="modalForm__x bx bx-x"></i>
         <button className="modalForm__btn">
